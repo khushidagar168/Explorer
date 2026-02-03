@@ -12,6 +12,7 @@ import {
   Pencil,
   Plus,
 } from "lucide-react";
+import { Tooltip } from "antd";
 
 const STORAGE_KEY = "fileExplorer:collapsed";
 
@@ -54,6 +55,7 @@ function FileTree({
   onCreateFile,
   onRename,
   onDelete,
+  treeVersion
 }) {
   const children = nodes.filter((n) => n.parentId === parentId);
 
@@ -70,6 +72,7 @@ function FileTree({
           onCreateFile={onCreateFile}
           onRename={onRename}
           onDelete={onDelete}
+          treeVersion={treeVersion}
         />
       ))}
     </ul>
@@ -87,10 +90,16 @@ function TreeNode({
   onCreateFile,
   onRename,
   onDelete,
+  treeVersion,
 }) {
   const [expanded, setExpanded] = useState(() => {
     return getCollapsedMap()[node.id] !== true;
   });
+
+  // Add this useEffect to respond to treeVersion changes
+  useEffect(() => {
+    setExpanded(getCollapsedMap()[node.id] !== true);
+  }, [treeVersion, node.id]);
 
   const isActive = node.type === "file" && node.id === activeFileId;
 
@@ -114,10 +123,9 @@ function TreeNode({
       <div
         onClick={handleClick}
         className={`group flex items-center gap-1 px-2 py-1 rounded cursor-pointer
-          ${
-            isActive
-              ? "bg-pink-900/40 border-l-4 border-pink-500"
-              : "hover:bg-pink-900/20"
+          ${isActive
+            ? "bg-pink-900/40 border-l-4 border-pink-500"
+            : "hover:bg-pink-900/20"
           }`}
       >
         {/* Chevron */}
@@ -151,38 +159,47 @@ function TreeNode({
 
         {/* Actions */}
         <div className="hidden group-hover:flex gap-1">
-          <Pencil
-            onClick={(e) => {
-              e.stopPropagation();
-              onRename(node.id, node.name);
-            }}
-            className="w-4 h-4 text-pink-400"
-          />
+          <Tooltip title="Rename">
+            <Pencil
+              onClick={(e) => {
+                e.stopPropagation();
+                onRename(node.id, node.name);
+              }}
+              className="w-4 h-4 text-pink-400 cursor-pointer"
+            />
+          </Tooltip>
 
-          <Trash2
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete(node.id);
-            }}
-            className="w-4 h-4 text-pink-400"
-          />
+          <Tooltip title="Delete">
+            <Trash2
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(node.id);
+              }}
+              className="w-4 h-4 text-pink-400 cursor-pointer"
+            />
+          </Tooltip>
 
           {node.type === "folder" && (
             <>
-              <Plus
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onCreateFolder(node.id);
-                }}
-                className="w-4 h-4 text-pink-400"
-              />
-              <FileText
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onCreateFile(node.id);
-                }}
-                className="w-4 h-4 text-pink-400"
-              />
+              <Tooltip title="New Folder">
+                <Plus
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onCreateFolder(node.id);
+                  }}
+                  className="w-4 h-4 text-pink-400 cursor-pointer"
+                />
+              </Tooltip>
+
+              <Tooltip title="New File">
+                <FileText
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onCreateFile(node.id);
+                  }}
+                  className="w-4 h-4 text-pink-400 cursor-pointer"
+                />
+              </Tooltip>
             </>
           )}
         </div>

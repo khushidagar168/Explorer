@@ -7,6 +7,7 @@ export default function ExplorerSidebar(props) {
       <ExplorerToolbar
         onNewFolder={() => props.onCreateFolder("root")}
         onNewFile={() => props.onCreateFile("root")}
+        onSelectFile={() => props.onSelectFile()}
         onCollapse={props.onCollapse}
         onRefresh={props.onRefresh}
       />

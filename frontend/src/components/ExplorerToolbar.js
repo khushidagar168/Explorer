@@ -1,4 +1,30 @@
-import { FolderPlus, FilePlus, RefreshCcw, FoldVertical } from "lucide-react";
+import { Tooltip } from "antd";
+import {
+  FolderPlus,
+  FilePlus,
+  RefreshCcw,
+  FoldVertical,
+} from "lucide-react";
+
+function IconButton({ title, onClick, children }) {
+  return (
+    <Tooltip title={title} placement="bottom">
+      <span
+        onClick={onClick}
+        className="
+          inline-flex items-center justify-center
+          p-1
+          cursor-pointer
+          text-pink-400
+          hover:text-pink-300
+          transition-colors
+        "
+      >
+        {children}
+      </span>
+    </Tooltip>
+  );
+}
 
 export default function ExplorerToolbar({
   onNewFolder,
@@ -12,11 +38,22 @@ export default function ExplorerToolbar({
         Explorer
       </h2>
 
-      <div className="flex gap-1">
-        <FolderPlus onClick={onNewFolder} />
-        <FilePlus onClick={onNewFile} />
-        <FoldVertical onClick={onCollapse} />
-        <RefreshCcw onClick={onRefresh} />
+      <div className="flex gap-2">
+        <IconButton title="New Folder" onClick={onNewFolder}>
+          <FolderPlus size={18} />
+        </IconButton>
+
+        <IconButton title="New File" onClick={onNewFile}>
+          <FilePlus size={18} />
+        </IconButton>
+
+        <IconButton title="Collapse All Folders" onClick={onCollapse}>
+          <FoldVertical size={18} />
+        </IconButton>
+
+        <IconButton title="Refresh Explorer" onClick={onRefresh}>
+          <RefreshCcw size={18} />
+        </IconButton>
       </div>
     </div>
   );

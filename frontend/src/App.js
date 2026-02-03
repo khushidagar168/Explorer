@@ -56,6 +56,9 @@ function App() {
           parentId={null}
           onCreateFolder={(id) => open({ type: "folder", parentId: id })}
           onCreateFile={(id) => open({ type: "file", parentId: id })}
+          onSelectFile={(id) =>
+            explorer.setActiveFileId(explorer.activeFileId === id ? null : id)
+          }
           onRename={(id, oldName) => open({ type: "rename", nodeId: id, oldName })}
           onDelete={explorer.remove}
           onCollapse={explorer.collapseAll}
