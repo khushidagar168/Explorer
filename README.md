@@ -139,29 +139,3 @@ PUT    /rename
 DELETE /node
 ```
 
----
-
-## Edge Cases Covered
-
-- Duplicate names within the same folder
-- Recursive deletion of nested folders
-- Rename collisions
-- Invalid file or folder names
-- Persistence across server restarts
-
----
-
-## Future Improvements
-
-- Database-backed persistence
-- Inline rename support
-- File content editor
-- Drag-and-drop interactions
-
----
-
-## Closing Note
-
-This project was developed with a strong emphasis on clarity, correctness, and maintainability.
-
-**Code quality matters more than the number of features.**
