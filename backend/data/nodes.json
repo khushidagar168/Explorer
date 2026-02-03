@@ -1,0 +1,104 @@
+[
+  {
+    "id": "root",
+    "name": "root",
+    "type": "folder",
+    "parentId": null
+  },
+  {
+    "id": "c6a7aef4-2434-433d-a690-562fa1619961",
+    "name": "idk",
+    "type": "folder",
+    "parentId": "root"
+  },
+  {
+    "id": "4f926a51-6dc9-4f0f-8bce-0b827aba925d",
+    "name": "yes",
+    "type": "folder",
+    "parentId": "c6a7aef4-2434-433d-a690-562fa1619961"
+  },
+  {
+    "id": "fdbe785a-23e7-45be-8d01-3fed4d44250d",
+    "name": "no",
+    "type": "folder",
+    "parentId": "4f926a51-6dc9-4f0f-8bce-0b827aba925d"
+  },
+  {
+    "id": "50f1d4d8-c492-40cf-8575-c454c8d38da3",
+    "name": "hii.txt",
+    "type": "file",
+    "parentId": "fdbe785a-23e7-45be-8d01-3fed4d44250d"
+  },
+  {
+    "id": "6b7ea787-3be6-45b9-b6c2-78037bca682d",
+    "name": "yes",
+    "type": "folder",
+    "parentId": "root"
+  },
+  {
+    "id": "d2fea06c-7c99-4b00-93da-5c64640e18ae",
+    "name": "abc",
+    "type": "folder",
+    "parentId": "root"
+  },
+  {
+    "id": "65c64df0-cf46-4b5b-a3d9-ad40e073711d",
+    "name": "hh.md",
+    "type": "file",
+    "parentId": "root"
+  },
+  {
+    "id": "3ad400a3-59a6-4cbf-a32d-c9b2831aaf9c",
+    "name": "j",
+    "type": "folder",
+    "parentId": "root"
+  },
+  {
+    "id": "f39cc6a3-a969-4042-ac7b-317e2523b970",
+    "name": "ji",
+    "type": "folder",
+    "parentId": "root"
+  },
+  {
+    "id": "fe3e852e-4223-4975-bda3-de9da8ab22ba",
+    "name": "README.md",
+    "type": "file",
+    "parentId": "c6a7aef4-2434-433d-a690-562fa1619961"
+  },
+  {
+    "id": "255ff0bb-8379-46ef-8b5f-19da1670d6b5",
+    "name": "README.md",
+    "type": "file",
+    "parentId": "4f926a51-6dc9-4f0f-8bce-0b827aba925d"
+  },
+  {
+    "id": "4be1a541-895d-4483-973c-31e9a265590c",
+    "name": "config.json",
+    "type": "file",
+    "parentId": "4f926a51-6dc9-4f0f-8bce-0b827aba925d"
+  },
+  {
+    "id": "50266262-88e0-4f61-8371-0b42bb9c1ece",
+    "name": "config.json",
+    "type": "file",
+    "parentId": "6b7ea787-3be6-45b9-b6c2-78037bca682d"
+  },
+  {
+    "id": "cffc0a1d-a8b8-45e2-a24e-5c8085007e98",
+    "name": "jii",
+    "type": "file",
+    "parentId": "3ad400a3-59a6-4cbf-a32d-c9b2831aaf9c"
+  },
+  {
+    "id": "8edb980d-14e2-4347-8f73-d2edbd03b324",
+    "name": "hi.js",
+    "type": "file",
+    "parentId": "3ad400a3-59a6-4cbf-a32d-c9b2831aaf9c"
+  },
+  {
+    "id": "daaf00e9-0ec2-468b-a4aa-4f6c53735174",
+    "name": "abc",
+    "type": "file",
+    "parentId": "d2fea06c-7c99-4b00-93da-5c64640e18ae"
+  }
+]
