@@ -1,95 +1,96 @@
+# Simple Real-Time File Explorer
 
-# File Explorer (VS Code–Inspired)
+This project implements a simple file explorer (similar to the VS Code sidebar) using **React** for the frontend and **Node.js + Express** for the backend.
 
-A production-minded, VS Code–inspired file explorer built with **React** and **Node.js**.
-The implementation prioritizes **code quality, correctness, and maintainability** over feature volume.
+The purpose of this assignment is to demonstrate:
+- Frontend state management
+- Backend API design
+- Handling asynchronous operations
+- Optimistic UI updates
+- Clear and structured communication
+
+This is not a UI design–focused project. The emphasis is on correctness and behavior.
 
 ---
 
-## Overview
+## Features
 
-This project implements a hierarchical file explorer with a clear separation of concerns between frontend UI and backend APIs. The backend acts as the **single source of truth**, while the frontend delivers a responsive and predictable user experience.
-
----
-
-## Key Features
-
-- Hierarchical folders and files (unlimited depth)
-- Create, rename, and delete files and folders
-- Expand and collapse folders with persistent state
-- Active file highlighting
+- Nested folders and files (unlimited depth)
+- Create folder
+- Create file
+- Rename file or folder
+- Delete file or folder
+- Expand and collapse folders
 - Optimistic UI updates with rollback on failure
-- Persistent backend storage using a JSON store
-- Dark, VS Code–inspired pink theme
-- Non-blocking notifications via Toastify
-- Modal-based inputs using Ant Design
+- Backend-managed persistent state
 
 ---
 
-## Architecture & Design Decisions
+## Data Model
 
-### Data Model
-The file system is represented as a flat list of nodes:
+The file tree is stored as a flat list of nodes:
 
 ```json
 {
   "id": "uuid",
   "name": "example",
   "type": "folder | file",
-  "parentId": "parent-node-id | null"
+  "parentId": "parent-id | null"
 }
 ```
 
+- Each file or folder has a unique `id`
+- Each node has exactly one parent (except the root)
 - Parent–child relationships are derived using `parentId`
-- A single immutable root node (`id = "root"`) is enforced
-- Flat structure simplifies persistence, updates, and recursive operations
+- A single root node (`parentId = null`) is enforced
 
 ---
 
-### Backend as Source of Truth
-All invariants are enforced server-side:
+## Backend (Source of Truth)
 
-- Unique file and folder names within the same parent (case-insensitive)
-- Invalid names are rejected
-- Root folder cannot be renamed or deleted
-- Recursive deletion is handled safely on the backend
-- State persists across server restarts
+The backend acts as the single source of truth for the file tree.
 
----
+Responsibilities handled on the backend:
+- Creating files and folders
+- Renaming nodes
+- Deleting nodes (including recursive deletion)
+- Basic input validation
+- Persisting data using a JSON store
 
-### Optimistic UI Strategy
-The frontend applies optimistic updates for create, rename, and delete actions:
-
-1. UI updates immediately
-2. API request is executed
-3. On failure, UI state is rolled back and the user is notified
-
-This ensures fast UX without sacrificing consistency.
+The frontend always syncs its state with backend responses.
 
 ---
 
-### Expand / Collapse Handling
-- Folder expansion state is managed locally
-- Collapse state is persisted using `localStorage`
-- A global “Collapse All” action resets all folders
+## Optimistic UI Updates
+
+The frontend uses optimistic updates for all user actions.
+
+Flow:
+1. UI updates immediately after a user action
+2. Backend API request runs in the background
+3. If the request succeeds, the UI state is kept
+4. If the request fails, the UI state is reverted and an error message is shown
 
 ---
 
-### UX Considerations
-- Blocking browser prompts replaced with Ant Design modals
-- Alerts replaced with Toastify notifications
-- Ant Design components themed using `ConfigProvider`
+## API Endpoints
+
+```http
+GET    /tree
+POST   /folder
+POST   /file
+PUT    /rename
+DELETE /node
+```
 
 ---
 
-## Technology Stack
+## Tech Stack
 
 ### Frontend
 - React
-- Tailwind CSS
-- Ant Design
-- Lucide React
-- React Toastify
+- Ant Design (modals)
+- React Toastify (notifications)
 
 ### Backend
 - Node.js
@@ -102,6 +103,7 @@ This ensures fast UX without sacrificing consistency.
 ## Running the Project
 
 ### Backend
+
 ```bash
 cd backend
 npm install
@@ -116,6 +118,7 @@ http://localhost:4000
 ---
 
 ### Frontend
+
 ```bash
 cd frontend
 npm install
@@ -129,30 +132,9 @@ http://localhost:3000
 
 ---
 
-## API Endpoints
+## Notes
 
-```http
-GET    /tree
-POST   /folder
-POST   /file
-PUT    /rename
-DELETE /node
-```
----
-
-## Edge Cases Covered
-
-- Duplicate names within the same folder
-- Recursive deletion of nested folders
-- Rename collisions
-- Invalid file or folder names
-- Persistence across server restarts
-
----
-
-## Future Improvements
-
-- Database-backed persistence
-- Inline rename support
-- File content editor
-- Drag-and-drop interactions
+- No page reloads during interactions
+- Drag and drop is intentionally not implemented
+- Styling is minimal and secondary to logic
+- Focus is on correctness, async handling, and clear state management
