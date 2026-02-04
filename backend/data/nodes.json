@@ -4,5 +4,11 @@
     "name": "root",
     "type": "folder",
     "parentId": null
+  },
+  {
+    "id": "23773fe0-43f3-47e1-8bed-6d56fca09bd1",
+    "name": "test",
+    "type": "folder",
+    "parentId": "root"
   }
 ]

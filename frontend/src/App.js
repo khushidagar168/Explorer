@@ -13,7 +13,15 @@ function App() {
 
   const [modal, setModal] = useState(null);
   const [value, setValue] = useState("");
-
+  const [isCollapsed, setIsCollapsed] = useState(true)
+  const handleCollapse = () => {
+    if (isCollapsed) {
+      explorer.expandAll()
+    } else {
+      explorer.collapseAll()
+    }
+    setIsCollapsed(!isCollapsed)
+  }
   const open = (action) => {
     setValue(action.oldName || "");
     setModal(action);
@@ -61,7 +69,7 @@ function App() {
           }
           onRename={(id, oldName) => open({ type: "rename", nodeId: id, oldName })}
           onDelete={explorer.remove}
-          onCollapse={explorer.collapseAll}
+          onCollapse={handleCollapse}
           onRefresh={explorer.refresh}
         />
 

@@ -40,7 +40,11 @@ export function useFileExplorer() {
     setTreeVersion((v) => v + 1);
     toast.info("Folders collapsed");
   }
-
+  function expandAll() {
+    localStorage.removeItem("fileExplorer:collapsed");
+    setTreeVersion((v) => v + 1);
+    toast.info("Folders expanded");
+  }
   async function create(type, parentId, name) {
     const tempId = `temp-${Date.now()}`;
     const prev = [...nodes];
@@ -103,6 +107,7 @@ export function useFileExplorer() {
     setActiveFileId,
     refresh,
     collapseAll,
+    expandAll,
     create,
     rename,
     remove,
